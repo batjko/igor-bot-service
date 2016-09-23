@@ -16,7 +16,7 @@ module.exports = function (param) {
 	  max = Math.floor(max);
 	  return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
-
+	console.log(JSON.stringify(param.args, null, 2))
 	jsonfile.readFile('./config/snapple-facts.json', function(err, data) {
 		if (err) return console.error(err)
 		const randomNum = getRandomNum(2, 1031) // min and max in data set
