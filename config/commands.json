@@ -1,10 +1,10 @@
 {
-	"snapple-me": {
-		"alias": [ "snapple-me" ],
-		"help": "Just snapple me.",
-		"description": "Gets a random Snapple fact"
-	},
-	"error": {
-		"exclude": true
-	}
+    "snapple-me": {
+        "alias": [ "snapple-me" ],
+        "help": "Just snapple me.",
+        "description": "Gets a random Snapple fact"
+    },
+    "error": {
+        "exclude": true
+    }
 }

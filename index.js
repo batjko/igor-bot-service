@@ -1,14 +1,11 @@
 const slackTerminal = require('slack-terminalize')
+const path = require('path')
 
-// get slack token from server env
+// Slack token must be set as env variable on server
 slackTerminal.init(process.env.slackToken, {
-    // slack rtm client options here
-    // more info at: https://github.com/slackhq/node-slack-client/blob/master/lib/clients/rtm/client.js
+  autoReconnect: true
 }, {
-    // app configurations to suit your project structure
-    // to see the list of all possible config,
-    // check this out: https://github.com/ggauravr/slack-terminalize/blob/master/util/config.js
-	CONFIG_DIR: __dirname + '/config',
-	COMMAND_DIR: __dirname + '/commands',
-	ERROR_COMMAND: 'error'
+  CONFIG_DIR: path.join(__dirname, '/config'),
+  COMMAND_DIR: path.join(__dirname, '/commands'),
+  ERROR_COMMAND: 'error'
 })
