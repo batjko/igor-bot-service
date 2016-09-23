@@ -1,7 +1,7 @@
-const slackTerminal = require('slack-terminalize');
+const slackTerminal = require('slack-terminalize')
 
-// TODO get slack token (create bot user)
-slackTerminal.init('xoxb-83304625063-F1b4aDkLhi5YBKDruAPJ05sS', {
+// get slack token from server env
+slackTerminal.init(process.env.slackToken, {
     // slack rtm client options here
     // more info at: https://github.com/slackhq/node-slack-client/blob/master/lib/clients/rtm/client.js
 }, {
@@ -11,4 +11,4 @@ slackTerminal.init('xoxb-83304625063-F1b4aDkLhi5YBKDruAPJ05sS', {
 	CONFIG_DIR: __dirname + '/config',
 	COMMAND_DIR: __dirname + '/commands',
 	ERROR_COMMAND: 'error'
-});
+})
