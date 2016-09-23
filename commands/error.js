@@ -1,5 +1,5 @@
 module.exports = function (param) {
-	if (param.args.find(x => x.toLowerCase() === 'snapple-me').length > 0) {
+	if (param.args && param.args.find(x => x.toLowerCase() === 'snapple-me').length > 0) {
 		const jsonfile = require('jsonfile')
 		const util 	= require('../util')
 		function getRandomNum(min, max) {
