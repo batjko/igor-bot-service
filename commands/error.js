@@ -12,7 +12,7 @@ module.exports = function (param) {
 			if (err) return console.error(err)
 			const randomNum = getRandomNum(2, 1031) // min and max in data set
 
-			let response
+			let response = null
 
 			// try up to 5 times, in case of errors
 			let limit = 5
