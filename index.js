@@ -1,6 +1,7 @@
-var slackTerminal = require('slack-terminalize');
+const slackTerminal = require('slack-terminalize');
 
-slackTerminal.init('xoxb-token', {
+// TODO get slack token (create bot user)
+slackTerminal.init('xoxb-83304625063-F1b4aDkLhi5YBKDruAPJ05sS', {
     // slack rtm client options here
     // more info at: https://github.com/slackhq/node-slack-client/blob/master/lib/clients/rtm/client.js
 }, {
@@ -8,5 +9,6 @@ slackTerminal.init('xoxb-token', {
     // to see the list of all possible config,
     // check this out: https://github.com/ggauravr/slack-terminalize/blob/master/util/config.js
 	CONFIG_DIR: __dirname + '/config',
-	COMMAND_DIR: __dirname + '/commands'
+	COMMAND_DIR: __dirname + '/commands',
+	ERROR_COMMAND: 'error'
 });
