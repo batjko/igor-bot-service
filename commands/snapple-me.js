@@ -3,7 +3,6 @@ const util = require('../util')
 
 // param comes with the Slack message
 module.exports = function (param) {
-  // module.exports = function (param) {
   // param object contains the following keys:
   // 1. command - the primary command name
   // 2. args - an array of strings, which is user's message posted in the channel, separated by space
