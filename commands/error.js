@@ -5,7 +5,7 @@ module.exports = function (param) {
     return Math.floor(Math.random() * (max - min + 1)) + min
   }
 
-  if (param.args && param.args.find(x => x.toLowerCase() === 'snapple-me').length > 0) {
+  if (param.args && param.args.find(x => x.toLowerCase() === 'snapple-me')) {
     const jsonfile = require('jsonfile')
     const util = require('../util')
 
