@@ -1,8 +1,8 @@
-const jsonfile = require('jsonfile')
-const util = require('../util')
+import jsonfile from 'jsonfile'
+import util from '../util'
 
-// param comes with the Slack message
-module.exports = function (param) {
+// must export as es5, as slack-terminalize expects it
+module.exports = function snapple(param) {
   // param object contains the following keys:
   // 1. command - the primary command name
   // 2. args - an array of strings, which is user's message posted in the channel, separated by space

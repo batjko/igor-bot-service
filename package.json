@@ -1,15 +1,26 @@
 {
-  "name": "igor-bot-service",
+  "name": "chuck",
   "version": "1.0.0",
-  "description": "Igor knows things",
-  "main": "index.js",
+  "description": "Chuck makes things happen",
+  "main": "dist/index.js",
   "dependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-plugin-transform-async-to-generator": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.2.2",
+    "better-capitalize": "^1.0.0",
+    "dotenv": "^4.0.0",
+    "es6-promisify": "^5.0.0",
+    "gitlab": "^1.7.1",
     "jsonfile": "^2.4.0",
     "nodemon": "^1.10.2",
-    "slack-terminalize": "^1.0.0"
+    "simple-git": "^1.67.0",
+    "slack-terminalize": "^1.0.0",
+    "uuid": "^3.0.1"
   },
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "babel-watch src/index.js",
+    "build": "babel src -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +35,8 @@
     "terminal"
   ],
   "author": "Patrick Metzdorf",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-watch": "^2.0.6"
+  }
 }

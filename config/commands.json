@@ -4,6 +4,10 @@
         "help": "Just snapple me.",
         "description": "Gets a random Snapple fact"
     },
+    "chuck": {
+        "alias": ["chucky"],
+        "help": "chuck release deviceman minor"
+    },
     "error": {
         "exclude": true
     }

@@ -1,4 +1,4 @@
-# Igor Bot Service
+# Chuck Bot Service
 
 This repo holds a rudimentary Slack Bot.
 Currently it is only able to produce Snapple trivia on command.
