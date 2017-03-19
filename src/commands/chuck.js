@@ -5,22 +5,11 @@ const RTMClient = slack.getRTMClient()
 
 import runRelease from '../providers/gitlab'
 import getWise from '../providers/norris'
+import { createMessageBlock } from '../providers/messageTools'
 
 // import promisify from 'es6-promisify'
 
 import { getCmdType, getVersionType } from '../providers/parsers'
-
-const iconMap = {
-  good: 'https://www.ifonly.com/images/io/icon_checkmark_green.png',
-  danger: 'https://img.clipartfest.com/cc87ef190e3fc50966a405a1a02cada1_thumbs-down-circle-clipart-thumbs-down_1809-1802.png'
-}
-
-const defaultOptions = {
-  as_user: true,
-  unfurl_links: true,
-  unfurl_media: true,
-  link_names: 1
-}
 
 // must export as es5, as slack-terminalize expects it
 module.exports = async function chuck (param) {
@@ -59,7 +48,6 @@ module.exports = async function chuck (param) {
 
       if (!success) {
         chat.postMessage(param.channel, null, {
-          ...defaultOptions,
           attachments: createMessageBlock({
             user,
             success,
@@ -76,7 +64,6 @@ module.exports = async function chuck (param) {
         const wisdom = await getWise(user.real_name)
 
         chat.postMessage(param.channel, null, {
-          ...defaultOptions,
           attachments: createMessageBlock({
             user,
             success,
@@ -93,21 +80,20 @@ module.exports = async function chuck (param) {
       break
     }
     case 'INFO': {
-      const text = 'Chuck Norris knows this shit.\nHe just won\'t tell you right now.' // info(param.args)
+      const text = 'Requests for information must go unheard for now.' // info(param.args)
 
       chat.postMessage(param.channel, null, {
-        ...defaultOptions,
         attachments: createMessageBlock({
           user,
           success: !!text,
           fallback: text || 'Error getting that information',
-          appName: 'Deviceman',
-          appLink: 'http://gitlab.com/repos/deviceman',
+          appName: 'The Question Answerer...',
+          appLink: 'http://google.com',
           title: `${capitalize(param.args.join(' '))}`,
           text: `${text}`,
-          mrkdwn_in: ['text', 'pretext', 'title'],
-          firstField: { title: `${text ? 'Released By' : 'Requested By'}`, value: `${user.real_name} (<@${user.id}|${user.name}>)` },
-          secondField: { title: 'Info', value: 'foo bar' }
+          mrkdwn_in: ['text', 'title']
+          // firstField: { title: `${text ? 'Released By' : 'Requested By'}`, value: `${user.real_name} (<@${user.id}|${user.name}>)` },
+          // secondField: { title: 'Info', value: 'foo bar' }
         })
       })
       break
@@ -117,17 +103,16 @@ module.exports = async function chuck (param) {
       const success = false
 
       chat.postMessage(param.channel, null, {
-        ...defaultOptions,
         attachments: createMessageBlock({
           user,
           success,
           title: 'Command does not compute!',
           text: `Chuck Norris _chooses_ not to understand you.`,
-          appName: 'Deviceman',
-          appLink: 'http://gitlab.com/repos/deviceman',
-          firstField: { title: `${success ? 'Released By' : 'Requested By'}`, value: `${user.real_name} (<@${user.id}|${user.name}>)` },
-          secondField: { title: 'Info', value: 'foo bar' },
-          mrkdwn_in: ['text', 'pretext'],
+          // appName: 'Deviceman',
+          // appLink: 'http://gitlab.com/repos/deviceman',
+          // firstField: { title: `${success ? 'Released By' : 'Requested By'}`, value: `${user.real_name} (<@${user.id}|${user.name}>)` },
+          // secondField: { title: 'Info', value: 'foo bar' },
+          mrkdwn_in: ['text'],
           command: param.args.join(' ')
         })
       })
@@ -139,37 +124,3 @@ module.exports = async function chuck (param) {
   // 'author_name': `Released by: ${user.real_name} (<@${id}|${user.name}>)`,
   // 'author_link': 'http://flickr.com/bobby/',
   // 'author_icon': 'https://cdn2.iconfinder.com/data/icons/flurry-icons-for-deviants/512/command_prompt.png',
-
-
-const createMessageBlock = ({ success = true, firstField, secondField, command, ...other }) => [{
-  ...other,
-  color: success ? 'good' : 'danger',
-  'fields': [
-    {
-      'title': firstField.title,
-      'value': firstField.value,
-      'short': true
-    },
-    {
-      'title': secondField && secondField.title,
-      'value': secondField && secondField.value,
-      'short': true
-    }
-  ],
-  // 'image_url': 'http://my-website.com/path/to/image.jpg',
-  'thumb_url': success ? iconMap['good'] : iconMap['danger'],
-  'footer': command,
-  'footer_icon': 'https://cdn2.iconfinder.com/data/icons/flurry-icons-for-deviants/512/command_prompt.png',
-  'ts': Math.floor(Date.now() / 1000)
-}]
-
-/*
-  1. Find list of repos
-  2. Shallow clone repo
-  3. Find release script
-  4. Run Release script.
-  5. Parse output for success or failure.
-    a) if Success: get new version
-    b) if Failure: get current version and issue reason
-  6. Respond to user.
-*/
