@@ -35,7 +35,7 @@ async function findProject (args) {
   }
 }
 
-async function runRelease (args) {
+async function runRelease (args, versionType) {
   const { projectName, projectPath } = await findProject(args)
 
   if (!projectName) {
@@ -63,15 +63,15 @@ async function runRelease (args) {
   if (!shell.test('-f', `release.cmd`)) {
     shell.cd(`../..`)
     shell.rm('-rf', `temp/${projectName}_*`)
-    return { success: false, text: `Couldn't find the release script (${projectName}/release.sh)` }
+    return { success: false, projectName, text: 'Couldn\'t find the release script (expected it to be at `' + projectName + '/release.sh`)' }
   }
 
   // run script
-  const result = shell.exec(`release.cmd`)
+  const result = shell.exec(`release.cmd ${versionType}`)
   shell.cd(`../..`)
   shell.rm('-rf', `temp/${projectName}_*`)
   if (result.code !== 0) {
-    return { success: false, text: `Release script failed with status code ${result.code}` }
+    return { success: false, projectName, text: `Release script failed with status code ${result.code}` }
   }
 
   // parse output
@@ -89,9 +89,8 @@ async function runRelease (args) {
   // return result
   return version.length > 0
     ? { success: true, projectName, projectPath, text: version[0] }
-    : { success: false, text: 'Unable to find the version in the release script\'s output' }
+    : { success: false, projectName, text: 'Unable to find the version in the release script\'s output' }
 }
 
 export default runRelease
-// runRelease('test2')
-//   .then(output => console.log(JSON.stringify(output, null, 2)))
+
