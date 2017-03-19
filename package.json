@@ -4,6 +4,7 @@
   "description": "Chuck makes things happen",
   "main": "dist/index.js",
   "dependencies": {
+    "axios": "^0.15.3",
     "babel-cli": "^6.24.0",
     "babel-plugin-transform-async-to-generator": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
@@ -12,6 +13,7 @@
     "dotenv": "^4.0.0",
     "es6-promisify": "^5.0.0",
     "gitlab": "^1.7.1",
+    "he": "^1.1.1",
     "jsonfile": "^2.4.0",
     "nodemon": "^1.10.2",
     "simple-git": "^1.67.0",

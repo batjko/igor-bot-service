@@ -4,6 +4,7 @@ const chat = slack.getWebClient().chat
 const RTMClient = slack.getRTMClient()
 
 import runRelease from '../providers/gitlab'
+import getWise from '../providers/norris'
 
 // import promisify from 'es6-promisify'
 
@@ -72,6 +73,7 @@ module.exports = async function chuck (param) {
         })
       } else {
         const version = text
+        const wisdom = await getWise(user.real_name)
 
         chat.postMessage(param.channel, null, {
           ...defaultOptions,
@@ -81,6 +83,7 @@ module.exports = async function chuck (param) {
             fallback: `${appName} - ${version} released`,
             title: `${appName} - ${version} released`,
             title_link: projectPath,
+            text: wisdom,
             firstField: { title: 'Released By', value: `${user.real_name} (<@${user.id}|${user.name}>)` },
             secondField: { title: 'Update Type', value: capitalize(versionType) },
             command: param.args.join(' ')
