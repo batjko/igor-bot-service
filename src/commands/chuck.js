@@ -54,6 +54,7 @@ module.exports = async function chuck (param) {
       }
 
       const { text, projectName, projectPath } = result
+      const appName = capitalize(projectName)
 
       if (!success) {
         chat.postMessage(param.channel, null, {
@@ -61,8 +62,8 @@ module.exports = async function chuck (param) {
           attachments: createMessageBlock({
             user,
             success,
-            fallback: `Release failed: ${text}!`,
-            title: 'Release failed!',
+            fallback: `${appName} Release failed: ${text}!`,
+            title: `${appName} Release failed!`,
             text: `${text}!`,
             mrkdwn_in: ['text'],
             firstField: { title: 'Requested By', value: `${user.real_name} (<@${user.id}|${user.name}>)` },
@@ -71,18 +72,17 @@ module.exports = async function chuck (param) {
         })
       } else {
         const version = text
-        const appName = capitalize(projectName)
-        const versionSkipped = versionType === 'skip'
+
         chat.postMessage(param.channel, null, {
           ...defaultOptions,
           attachments: createMessageBlock({
             user,
             success,
-            fallback: `Released ${version} of ${appName}.`,
-            title: `${appName} Updated`,
+            fallback: `${appName} - ${version} released`,
+            title: `${appName} - ${version} released`,
             title_link: projectPath,
             firstField: { title: 'Released By', value: `${user.real_name} (<@${user.id}|${user.name}>)` },
-            secondField: { title: `${versionSkipped ? 'Current' : 'New'} Version`, value: `${version} ${versionSkipped ? '(not bumped)' : `(${versionType} update)`}` },
+            secondField: { title: 'Update Type', value: capitalize(versionType) },
             command: param.args.join(' ')
           })
         })
