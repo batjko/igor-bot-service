@@ -29,9 +29,6 @@
     "type": "git",
     "url": "https://github.com/batjko/igor-bot-service"
   },
-  "engines": {
-    "node": "6.3.x"
-  },
   "keywords": [
     "slack",
     "terminal"
