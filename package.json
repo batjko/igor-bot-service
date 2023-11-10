@@ -4,7 +4,7 @@
   "description": "Chuck makes things happen",
   "main": "dist/index.js",
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^1.6.0",
     "babel-cli": "^6.24.0",
     "babel-plugin-transform-async-to-generator": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
