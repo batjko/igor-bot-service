@@ -18,7 +18,7 @@
     "nodemon": "^1.10.2",
     "simple-git": "^3.32.3",
     "slack-terminalize": "^1.0.0",
-    "uuid": "^3.0.1"
+    "uuid": "^14.0.0"
   },
   "scripts": {
     "start": "babel-watch src/index.js",
